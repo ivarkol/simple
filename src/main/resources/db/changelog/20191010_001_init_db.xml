@@ -47,7 +47,7 @@
     </changeSet>
     <changeSet author="ivan" id="1570735438827-4">
         <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="car"
-                                 constraintName="fklxtq8nj0f29fesfbvvotkjn6t" deferrable="false"
+                                 constraintName="car_person_fk" deferrable="false"
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
