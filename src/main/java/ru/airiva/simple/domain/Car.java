@@ -7,14 +7,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "car")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -36,5 +44,13 @@ public class Car {
   @ManyToOne
   @JoinColumn(name = "person_id", nullable = false)
   private Person owner;
+
+  public static Car randomCar(Person person) {
+    return Car.builder()
+      .manufacturer(randomAlphabetic(40))
+      .model(randomAlphabetic(30))
+      .owner(person)
+      .build();
+  }
 
 }

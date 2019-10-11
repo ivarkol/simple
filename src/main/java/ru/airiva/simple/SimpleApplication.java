@@ -4,13 +4,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import ru.airiva.simple.domain.Person;
+import ru.airiva.simple.repository.PersonRepository;
+import ru.airiva.simple.service.impl.PersonServiceImpl;
 
-@EntityScan(basePackageClasses = Person.class)
+@EntityScan(basePackageClasses = {Person.class, PersonServiceImpl.class, PersonRepository.class})
 @SpringBootApplication
 public class SimpleApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SimpleApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(SimpleApplication.class, args);
+  }
 
 }
