@@ -1,0 +1,20 @@
+server:
+  port: 9999
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate.ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: home
+        jdbc.lob.non_contextual_creation: true
+  liquibase:
+    enabled: true
+    default-schema: home
+    user: postgres
+    password: postgres
+    change-log: classpath:/db/changelog/changelog_master.xml
