@@ -18,3 +18,22 @@ spring:
     user: simple
     password: simple
     change-log: classpath:/db/changelog/changelog_master.xml
+
+log4jdbc:
+  dump:
+    sql:
+      addsemicolon: true
+      maxlinelength: 0
+  trim:
+    sql:
+      extrablanklines: false
+
+logging:
+  level:
+    jdbc:
+      sqlonly: info
+      sqltiming: fatal
+      audit: fatal
+      resultset: fatal
+      resultsettable: info
+      connection: fatal
