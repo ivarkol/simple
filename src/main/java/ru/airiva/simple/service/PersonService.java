@@ -13,4 +13,6 @@ public interface PersonService {
 
   void addCars(Person person, int carCount);
 
+  String test(String value);
+
 }

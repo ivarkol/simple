@@ -9,6 +9,7 @@ import ru.airiva.simple.domain.Person;
 import ru.airiva.simple.repository.CarRepository;
 import ru.airiva.simple.repository.PersonRepository;
 import ru.airiva.simple.service.PersonService;
+import ru.airiva.simple.utils.CommonUtils;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -49,5 +50,11 @@ public class PersonServiceImpl implements PersonService {
     for (int i = 0; i < carCount; i++) {
       this.addCar(person);
     }
+  }
+
+  @Override
+  public String test(String value) {
+    personRepository.findAll();
+    return CommonUtils.someStaticMethod(value);
   }
 }
