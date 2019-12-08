@@ -21,6 +21,7 @@
         <mockito.version>2.27.0</mockito.version>
         <log4jdbc.version>2.0.0</log4jdbc.version>
         <powermock.version>2.0.4</powermock.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
     <dependencies>
@@ -40,7 +41,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -66,6 +66,17 @@
             <groupId>com.integralblue</groupId>
             <artifactId>log4jdbc-spring-boot-starter</artifactId>
             <version>${log4jdbc.version}</version>
+        </dependency>
+        <!-- swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
 
         <dependency>
