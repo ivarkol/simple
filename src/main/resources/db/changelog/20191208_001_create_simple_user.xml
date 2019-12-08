@@ -1,0 +1,101 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="20191208_001_01" author="ivan">
+        <createTable tableName="simple_user_authority">
+            <column name="simple_user_id" type="BIGINT"/>
+            <column name="authority_id" type="BIGINT"/>
+        </createTable>
+        <addPrimaryKey tableName="simple_user_authority"
+                       columnNames="simple_user_id, authority_id"
+                       constraintName="simple_user_authority_pkey"/>
+    </changeSet>
+
+    <changeSet id="20191208_001_02" author="ivan">
+        <createTable tableName="simple_user_role">
+            <column name="simple_user_id" type="BIGINT"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+        <addPrimaryKey tableName="simple_user_role"
+                       columnNames="simple_user_id, role_id"
+                       constraintName="simple_user_role_pkey"/>
+    </changeSet>
+
+    <changeSet id="20191208_001_03" author="ivan">
+        <createTable tableName="role_authority">
+            <column name="role_id" type="BIGINT"/>
+            <column name="authority_id" type="BIGINT"/>
+        </createTable>
+        <addPrimaryKey tableName="role_authority"
+                       columnNames="role_id, authority_id"
+                       constraintName="role_authority_pkey"/>
+    </changeSet>
+
+    <changeSet id="20191208_001_04" author="ivan">
+        <createSequence sequenceName="simple_user_seq"/>
+        <createTable tableName="simple_user">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="simple_user_pkey"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="simple_user_authority"
+                                 baseColumnNames="simple_user_id"
+                                 constraintName="simple_user_simple_user_authority_fk"
+                                 referencedTableName="simple_user"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="simple_user_role"
+                                 baseColumnNames="simple_user_id"
+                                 constraintName="simple_user_simple_user_role_fk"
+                                 referencedTableName="simple_user"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="20191208_001_05" author="ivan">
+        <createSequence sequenceName="authority_seq"/>
+        <createTable tableName="authority">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="authority_pkey"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="simple_user_authority"
+                                 baseColumnNames="authority_id"
+                                 constraintName="authority_simple_user_authority_fk"
+                                 referencedTableName="authority"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="role_authority"
+                                 baseColumnNames="authority_id"
+                                 constraintName="authority_role_authority_fk"
+                                 referencedTableName="authority"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20191208_001_06" author="ivan">
+        <createSequence sequenceName="role_seq"/>
+        <createTable tableName="role">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="role_pkey"/>
+            </column>
+            <column name="role_name" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="role_authority"
+                                 baseColumnNames="authority_id"
+                                 constraintName="role_role_authority_fk"
+                                 referencedTableName="role"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>
